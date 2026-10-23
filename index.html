@@ -86,6 +86,17 @@
     body { font-size: 16px; }
     .liberta { padding: 18px; }
     td .why { padding-left: 0; }
+    /* tabela em grade: nome à esquerda, valor à direita, sem cortar em telas de 320 px */
+    .table-wrap { overflow-x: visible; }
+    table, thead, tbody, tfoot, tr, th, td { display: block; }
+    thead tr, tbody tr, tfoot tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 12px; border-bottom: 1px solid var(--rule); padding: 12px 0; }
+    thead tr { padding: 0 0 8px; }
+    tfoot tr { border-bottom: 0; border-top: 3px solid var(--fg); }
+    th, td, tfoot td { border: 0; padding: 0; min-width: 0; }
+    td .what { display: block; }
+    .swatch { display: inline-block; vertical-align: -1px; margin-right: 8px; }
+    .tag { margin-left: 4px; }
+    td.num { font-size: 15px; }
   }
 </style>
 <script>if(window.parent!==window)document.documentElement.classList.add('em-iframe');</script>
