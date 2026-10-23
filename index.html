@@ -12,11 +12,11 @@
 <style>
   /* Layout: coluna única de leitura, estilo ficha de placar — total no topo, barra em escala, tabela, contexto da Libertadores */
   :root {
-    --bg: #fbf9f8;
-    --surface: #f2eeec;
+    --bg: #fff;
+    --surface: #f2f2f2;
     --fg: #1a1414;
     --muted: #6b5f5d;
-    --rule: #ddd4d1;
+    --rule: #e6e6e6;
     --red: #c8102e;
     --red-2: #e0475b;
     --red-3: #ef8a97;
@@ -77,11 +77,6 @@
   .compare .v { font-family: var(--display); font-weight: 800; font-size: 22px; text-transform: uppercase; line-height: 1.1; letter-spacing: -.01em; }
   .compare .v.eq { color: var(--red); }
 
-  footer { display: grid; gap: 8px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; }
-  footer p { margin: 0; }
-  footer ul { margin: 0; padding-left: 18px; display: grid; gap: 2px; }
-  footer a { color: inherit; text-underline-offset: 2px; }
-  footer a:hover, footer a:focus-visible { color: var(--red); }
   a:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
   /* dentro do iframe da matéria: margens enxutas */
@@ -171,15 +166,6 @@
     </div>
   </section>
 
-  <footer>
-    <p>Valores estimados com base em reportagens da imprensa; o clube não divulgou números oficiais. Valores em dólar convertidos pela cotação atual.</p>
-    <ul>
-      <li><a href="https://www.terra.com.br/esportes/flamengo/veja-quanto-o-flamengo-ja-deixou-de-ganhar-em-premiacoes-em-26,fb88ab63d7c55a863f64312083968eedfqjf3geq.html" target="_blank" rel="noopener">Terra: quanto o Flamengo já deixou de ganhar em premiações em 2026</a></li>
-      <li><a href="https://www.noticiasdofla.com/2026/05/eliminacao-para-o-vitoria-gera-impacto.html" target="_blank" rel="noopener">Notícias do Fla: impacto da eliminação para o Vitória</a></li>
-      <li><a href="https://www.cnnbrasil.com.br/esportes/futebol/flamengo/flamengo-deixa-de-receber-premiacao-milionaria-com-queda-na-copa-do-brasil/" target="_blank" rel="noopener">CNN Brasil: premiação perdida na Copa do Brasil</a></li>
-      <li><a href="https://en.wikipedia.org/wiki/2026_Recopa_Sudamericana" target="_blank" rel="noopener">Wikipedia: Recopa Sul-Americana 2026</a></li>
-    </ul>
-  </footer>
 </main>
 </body>
 </html>
