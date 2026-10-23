@@ -178,5 +178,12 @@
   </section>
 
 </main>
+<script>
+/* altura automática: avisa a matéria quanto o iframe precisa ter para mostrar tudo, sem rolagem */
+(function(){if(window.parent===window)return;var ultima=0;
+function envia(){var h=Math.ceil(document.documentElement.getBoundingClientRect().height);if(h!==ultima){ultima=h;parent.postMessage({type:'flamengo-frustracoes:altura',altura:h},'*');}}
+addEventListener('load',envia);addEventListener('resize',envia);if(document.fonts)document.fonts.ready.then(envia);
+if(window.ResizeObserver)new ResizeObserver(envia).observe(document.documentElement);envia();})();
+</script>
 </body>
 </html>
