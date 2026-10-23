@@ -1,15 +1,7 @@
 <!-- As frustrações esportivas e financeiras do Flamengo: embed para a matéria (fios acima e abaixo, 8px de espaço depois do texto) -->
-<!-- Altura automática, sem barra de rolagem: a página informa a própria altura e o script abaixo ajusta o iframe -->
+<!-- Página inteira, sem barra de rolagem e sem script: a altura do iframe é calculada pela largura da tela.
+     Celular (tela até 512px): 5,57 x a largura da coluna (tela - 32px). Desktop e tablet: 1540px. -->
 <div class="flamengo-frustracoes-embed" style="margin-top:8px;margin-right:0;margin-bottom:8px;margin-left:0;border-top:1px solid #E6E6E6;border-bottom:1px solid #E6E6E6">
-  <iframe id="flamengo-frustracoes" src="https://igorsiqueirahub.github.io/flamengo-frustracoes/" title="As frustrações esportivas e financeiras do Flamengo" loading="lazy" scrolling="no"
-    width="100%" height="1600" style="display:block;width:100%;height:1600px;border:0;overflow:hidden"></iframe>
+  <iframe src="https://igorsiqueirahub.github.io/flamengo-frustracoes/" title="As frustrações esportivas e financeiras do Flamengo" loading="lazy" scrolling="no"
+    width="100%" height="1540" style="display:block;width:100%;height:max(1540px, min(calc((100vw - 32px) * 5.57 + 8px), calc((513px - 100vw) * 100000)));border:0;overflow:hidden"></iframe>
 </div>
-<script>
-(function(){
-  var f=document.getElementById('flamengo-frustracoes');
-  addEventListener('message',function(e){
-    if(!f||e.source!==f.contentWindow||!e.data||e.data.type!=='flamengo-frustracoes:altura')return;
-    f.style.height=e.data.altura+'px';f.height=e.data.altura;
-  });
-})();
-</script>

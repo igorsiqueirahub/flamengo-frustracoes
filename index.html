@@ -10,6 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..900&display=swap">
 <style>
+  /* Tamanhos em rem, e o rem acompanha a largura: a página cresce na mesma proporção da largura,
+     então o iframe da matéria pode ter a altura calculada só com CSS, sem script */
+  html { font-size: 16px; }
+  @media (max-width: 480px) { html { font-size: calc(100vw / 22.5); } }
+  @media (min-width: 481px) { html { font-size: calc(min(100vw, 640px) / 40); } }
+
   /* Layout: coluna única de leitura, estilo ficha de placar — total no topo, barra em escala, tabela, contexto da Libertadores */
   :root {
     --bg: #fff;
@@ -27,76 +33,78 @@
     color-scheme: light;
   }
 
-  body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 1.0625rem; line-height: 1.6; -webkit-font-smoothing: antialiased; }
   .wrap {
-    max-width: 760px; margin: 0 auto;
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
-    padding-block: 40px 48px;
-    display: grid; gap: 40px;
+    max-width: 40rem; margin: 0 auto;
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    padding-block: 2.5rem 3rem;
+    display: grid; gap: 2.5rem;
   }
-  .stripes { height: 6px; background: repeating-linear-gradient(90deg, var(--red) 0 40px, var(--fg) 40px 80px); }
+  .stripes { height: 0.375rem; background: repeating-linear-gradient(90deg, var(--red) 0 2.5rem, var(--fg) 2.5rem 5rem); }
 
-  header { display: grid; gap: 12px; }
-  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-  h1 { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 6vw, 46px); line-height: 1.04; letter-spacing: -.02em; margin: 0; text-wrap: balance; text-transform: uppercase; }
+  header { display: grid; gap: 0.75rem; }
+  .eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-family: var(--display); font-weight: 800; font-size: 2.4rem; line-height: 1.04; letter-spacing: -.02em; margin: 0; text-wrap: balance; text-transform: uppercase; }
   .lede { margin: 0; max-width: 62ch; color: var(--muted); }
 
-  .total { display: grid; gap: 4px; border-top: 3px solid var(--fg); padding-top: 16px; }
-  .total .label { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-  .total .value { font-family: var(--display); font-weight: 800; font-size: clamp(48px, 12vw, 92px); line-height: .95; letter-spacing: -.03em; color: var(--red); font-variant-numeric: tabular-nums; }
+  .total { display: grid; gap: 0.25rem; border-top: 0.1875rem solid var(--fg); padding-top: 1rem; }
+  .total .label { font-size: 0.75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .total .value { font-family: var(--display); font-weight: 800; font-size: 4.8rem; line-height: .95; letter-spacing: -.03em; color: var(--red); font-variant-numeric: tabular-nums; }
   .total .value small { font-size: .42em; font-weight: 700; letter-spacing: -.01em; color: var(--fg); margin-left: .2em; }
-  .total .note { margin: 6px 0 0; font-size: 15px; color: var(--muted); }
+  .total .note { margin: 0.375rem 0 0; font-size: 0.9375rem; color: var(--muted); }
 
-  h2 { font-family: var(--display); font-weight: 800; font-size: 24px; line-height: 1.1; margin: 0; text-transform: uppercase; letter-spacing: -.01em; text-wrap: balance; }
-  section { display: grid; gap: 16px; }
+  h2 { font-family: var(--display); font-weight: 800; font-size: 1.5rem; line-height: 1.1; margin: 0; text-transform: uppercase; letter-spacing: -.01em; text-wrap: balance; }
+  section { display: grid; gap: 1rem; }
 
-  .bar { display: flex; height: 44px; width: 100%; border: 1px solid var(--rule); }
+  .bar { display: flex; height: 2.75rem; width: 100%; border: 1px solid var(--rule); }
   .bar span { display: block; height: 100%; }
-  .bar span + span { border-left: 2px solid var(--bg); }
-  .scale { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; margin-top: -8px; }
+  .bar span + span { border-left: 0.125rem solid var(--bg); }
+  .scale { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; margin-top: -0.5rem; }
 
   .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 16px; }
-  th, td { text-align: left; padding: 12px 8px 12px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
-  th { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+  th, td { text-align: left; padding: 0.75rem 0.5rem 0.75rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-size: 0.6875rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
   td.num, th.num { text-align: right; padding-right: 0; white-space: nowrap; font-weight: 700; font-variant-numeric: tabular-nums; }
-  td .what { font-weight: 700; display: flex; align-items: center; gap: 10px; }
-  td .why { display: block; font-size: 14px; color: var(--muted); margin-top: 2px; padding-left: 24px; }
-  .swatch { flex: none; width: 14px; height: 14px; }
-  tfoot td { border-bottom: 0; border-top: 3px solid var(--fg); font-family: var(--display); font-size: 20px; font-weight: 800; text-transform: uppercase; }
-  tfoot td.num { font-size: 24px; color: var(--red); }
+  td .what { font-weight: 700; display: flex; align-items: center; gap: 0.625rem; }
+  td .why { display: block; font-size: 0.875rem; color: var(--muted); margin-top: 0.125rem; padding-left: 1.5rem; }
+  .swatch { flex: none; width: 0.875rem; height: 0.875rem; }
+  tfoot td { border-bottom: 0; border-top: 0.1875rem solid var(--fg); font-family: var(--display); font-size: 1.25rem; font-weight: 800; text-transform: uppercase; }
+  tfoot td.num { font-size: 1.5rem; color: var(--red); }
 
-  .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 6px; border: 1px solid var(--rule); color: var(--muted); margin-left: 6px; vertical-align: 2px; }
+  .tag { display: inline-block; font-size: 0.6875rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 0.125rem 0.375rem; border: 1px solid var(--rule); color: var(--muted); margin-left: 0.375rem; vertical-align: 0.125rem; }
 
-  .liberta { background: var(--surface); padding: 24px; display: grid; gap: 14px; border-left: 6px solid var(--fg); }
+  .liberta { background: var(--surface); padding: 1.5rem; display: grid; gap: 0.875rem; border-left: 0.375rem solid var(--fg); }
   .liberta p { margin: 0; max-width: 62ch; }
-  .compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 4px; }
-  .compare div { display: grid; gap: 2px; }
-  .compare .k { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-  .compare .v { font-family: var(--display); font-weight: 800; font-size: 22px; text-transform: uppercase; line-height: 1.1; letter-spacing: -.01em; }
+  .compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(11.25rem, 1fr)); gap: 0.75rem; margin-top: 0.25rem; }
+  .compare div { display: grid; gap: 0.125rem; }
+  .compare .k { font-size: 0.6875rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .compare .v { font-family: var(--display); font-weight: 800; font-size: 1.375rem; text-transform: uppercase; line-height: 1.1; letter-spacing: -.01em; }
   .compare .v.eq { color: var(--red); }
 
-  a:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  a:focus-visible { outline: 0.125rem solid var(--red); outline-offset: 0.125rem; }
 
   /* dentro do iframe da matéria: margens enxutas */
-  html.em-iframe .wrap { padding-block: 16px 20px; padding-left: 2px; padding-right: 2px; }
+  html.em-iframe .wrap { padding-block: 1rem 1.25rem; padding-left: 0.125rem; padding-right: 0.125rem; }
 
   @media (max-width: 480px) {
-    body { font-size: 16px; }
-    .liberta { padding: 18px; }
+    body { font-size: 1rem; }
+    h1 { font-size: 1.875rem; }
+    .total .value { font-size: 3rem; }
+    .liberta { padding: 1.125rem; }
     td .why { padding-left: 0; }
     /* tabela em grade: nome à esquerda, valor à direita, sem cortar em telas de 320 px */
     .table-wrap { overflow-x: visible; }
     table, thead, tbody, tfoot, tr, th, td { display: block; }
-    thead tr, tbody tr, tfoot tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 12px; border-bottom: 1px solid var(--rule); padding: 12px 0; }
-    thead tr { padding: 0 0 8px; }
-    tfoot tr { border-bottom: 0; border-top: 3px solid var(--fg); }
+    thead tr, tbody tr, tfoot tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 0.75rem; border-bottom: 1px solid var(--rule); padding: 0.75rem 0; }
+    thead tr { padding: 0 0 0.5rem; }
+    tfoot tr { border-bottom: 0; border-top: 0.1875rem solid var(--fg); }
     th, td, tfoot td { border: 0; padding: 0; min-width: 0; }
     td .what { display: block; }
-    .swatch { display: inline-block; vertical-align: -1px; margin-right: 8px; }
-    .tag { margin-left: 4px; }
-    td.num { font-size: 15px; }
+    .swatch { display: inline-block; vertical-align: -1px; margin-right: 0.5rem; }
+    .tag { margin-left: 0.25rem; }
+    td.num { font-size: 0.9375rem; }
   }
 </style>
 <script>if(window.parent!==window)document.documentElement.classList.add('em-iframe');</script>
@@ -178,12 +186,5 @@
   </section>
 
 </main>
-<script>
-/* altura automática: avisa a matéria quanto o iframe precisa ter para mostrar tudo, sem rolagem */
-(function(){if(window.parent===window)return;var ultima=0;
-function envia(){var h=Math.ceil(document.documentElement.getBoundingClientRect().height);if(h!==ultima){ultima=h;parent.postMessage({type:'flamengo-frustracoes:altura',altura:h},'*');}}
-addEventListener('load',envia);addEventListener('resize',envia);if(document.fonts)document.fonts.ready.then(envia);
-if(window.ResizeObserver)new ResizeObserver(envia).observe(document.documentElement);envia();})();
-</script>
 </body>
 </html>
